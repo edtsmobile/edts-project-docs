@@ -210,7 +210,9 @@ Every generated doc must be reviewed by someone who knows the codebase. Check:
 
 The docs can also be read as a website with a sidebar, search, and light/dark themes, using [mdBook](https://rust-lang.github.io/mdBook/). The skill writes `book.toml` and `docs/SUMMARY.md` and keeps them in sync. On first use the agent checks for mdBook and **asks before installing it** (`brew install mdbook`); say no and the docs stay plain Markdown.
 
-To read the book, from the project root:
+After every run that adds or changes docs, the agent builds the book, starts `mdbook serve` in the background (or reuses one already running), and opens the new page in its built-in browser, for example the Claude desktop app's browser pane. Agents without a browser put the links in their report.
+
+To open it yourself, from the project root:
 
 ```sh
 mdbook serve --open

@@ -92,12 +92,13 @@ Work in this order. Stop where the user asked — "add AGENTS.md" means steps 1�
 6. **code track** (`code` / `all` scope only): doc comments per module, shared modules first — references 5 or 6
 7. **docs track:** `docs/README.md` — add every doc written in this run to the index (see below)
 8. **docs track:** mdBook — `book.toml`, `docs/SUMMARY.md`, `docs/theme/mermaid-init.js`; ask before installing mdBook — [references/10-mdbook.md](references/10-mdbook.md)
+9. **Preview:** build the book, start or reuse `mdbook serve`, and open the new docs in the built-in browser (or report their URLs) — reference 10, "Preview After Every Run"
 
 For a large project, finish after step 3, write the index and the mdBook files, leave the rest as `todo` rows in `docs/STATUS.md`, and report. The team picks up the remaining rows in task mode.
 
 ### Task mode (the user names a task ID such as `D04` / `S02` / `C02`, or asks for "the next task")
 
-Follow [references/8-status-tracking.md](references/8-status-tracking.md). The task ID decides the track: `D` and `S` = docs track, `C` = code track.
+Follow [references/8-status-tracking.md](references/8-status-tracking.md). The task ID decides the track: `D` and `S` = docs track, `C` = code track. End with the book preview (reference 10).
 
 ### Update mode (the user asks to update docs for a change or branch)
 
@@ -107,7 +108,7 @@ Follow [references/8-status-tracking.md](references/8-status-tracking.md). The t
 4. If the change adds a module, create its `docs/modules/<variant>/<module>.md`, add it to `ARCHITECTURE.md`, and append its rows to `docs/STATUS.md`.
 5. If an endpoint, request/response model, or SDK call changed, update its `docs/services/` doc.
 6. In `code` / `all` scope, also update doc comments on changed public symbols.
-7. Update `docs/README.md` and `docs/SUMMARY.md` if a doc was added, moved, or renamed. If mdBook is installed, run `mdbook build`.
+7. Update `docs/README.md` and `docs/SUMMARY.md` if a doc was added, moved, or renamed. If mdBook is installed, build and preview the changed docs (reference 10).
 
 ### Docs index — `docs/README.md`
 

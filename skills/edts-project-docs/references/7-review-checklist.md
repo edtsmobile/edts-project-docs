@@ -22,6 +22,7 @@ Run this checklist before telling the user you are done.
 - `CLAUDE.md` starts with `@AGENTS.md`.
 - Every doc in `docs/` is listed in `docs/README.md` and `docs/SUMMARY.md`, and `AGENTS.md` links to `docs/README.md`.
 - `mdbook build` passed, or the report says why it was not run (mdBook not installed, user declined).
+- The changed docs were opened in the book preview, or their URLs are in the report; only one `mdbook serve` runs for the project.
 - `book/` is in `.gitignore` and not committed.
 - No generic advice, no empty or "N/A" sections, no duplicated content between files.
 - Mermaid blocks use the ` ```mermaid ` fence and valid syntax.
@@ -39,6 +40,9 @@ Run this checklist before telling the user you are done.
 End every run with this report in chat:
 
 ```
+## Preview
+http://localhost:3000/flows/journey/warehouse-selection.html (server left running; Ctrl+C or stop the background process to end it)
+
 ## Scope
 docs (default) — code track not run; ask for DocC/KDoc comments to start it
 

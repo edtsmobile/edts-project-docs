@@ -11,4 +11,6 @@ build-dir = "book"
 create-missing = false
 
 [output.html]
+# Plain titles in the sidebar ("Architecture", not "1. Architecture").
+no-section-label = true
 additional-js = ["docs/theme/mermaid-init.js"]

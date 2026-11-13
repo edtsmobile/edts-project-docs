@@ -43,7 +43,7 @@ When the user names a task ID or asks for "the next task":
    - `D` task: references 2, 3, or 4. Never edit source files.
    - `S` task: reference 9. Never edit source files.
    - `C` task: reference 5 (iOS) or 6 (Android). Only comment lines, only in that row's module.
-5. Add the new doc to `docs/README.md` (the docs index) and `docs/SUMMARY.md` (the book sidebar); run `mdbook build` if mdBook is installed. Set **Status** `review`. Fill **PR** if the user gives the PR link.
+5. Add the new doc to `docs/README.md` (the docs index) and `docs/SUMMARY.md` (the book sidebar); build and preview the book if mdBook is installed (reference 10). Set **Status** `review`. Fill **PR** if the user gives the PR link.
 6. Add any new questions to Open Questions with **From** = the task ID. If the task cannot be finished without an answer, set the task to `blocked` and name the question ID in the Notes column.
 7. If you discovered work that has no row (a missing module, service, or flow), append a new `todo` row.
 

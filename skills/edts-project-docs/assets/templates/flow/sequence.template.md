@@ -1,11 +1,12 @@
 <!--
-Template for docs/flows/<flow>.md. Every arrow must match a call found in code. Remove this comment.
+Option: flow/sequence — a process that crosses code layers or modules (login + token refresh, checkout, push handling).
+Writes to docs/flows/sequence/<flow>.md. Every arrow must match a call found in code. Remove this comment.
 -->
 # <Flow Name>
 
 <One sentence: what triggers this flow and what it achieves.>
 
-**Modules involved:** `<Module>`, `<Module>`
+**Modules involved:** <module>, <module> · **Services:** [<service>](../../services/<rest|sdk>/<service>.md)
 
 ## Happy Path
 

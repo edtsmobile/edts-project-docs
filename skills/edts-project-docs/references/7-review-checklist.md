@@ -8,7 +8,6 @@ Run this checklist before telling the user you are done.
 - Every command was run, or is marked `> [!NOTE] Unverified:`.
 - Every type, module, scheme, and flavor name matches the code exactly.
 - Every arrow in a mermaid diagram corresponds to a call or dependency you found.
-- No ADR states a reason that did not come from a doc, commit, PR, or the user.
 
 ## Safety
 
@@ -21,9 +20,10 @@ Run this checklist before telling the user you are done.
 
 - `AGENTS.md` is 150 lines or fewer (`wc -l AGENTS.md`).
 - `CLAUDE.md` starts with `@AGENTS.md`.
-- Every file in `docs/` is linked from `AGENTS.md` or `docs/ARCHITECTURE.md`.
+- Every doc in `docs/` is listed in `docs/README.md`, and `AGENTS.md` links to `docs/README.md`.
 - No generic advice, no empty or "N/A" sections, no duplicated content between files.
 - Mermaid blocks use the ` ```mermaid ` fence and valid syntax.
+- Every module, service, and flow doc sits in its variant folder (`docs/<type>/<variant>/`), and the folder matches its row's **Type** in `docs/STATUS.md`.
 
 ## Status File
 
@@ -43,18 +43,18 @@ docs (default) — code track not run; ask for DocC/KDoc comments to start it
 ## Tasks
 - D01 AGENTS.md → review
 - D02 docs/ARCHITECTURE.md → review
-- D07 docs/modules/feature-cart.md → blocked (Q01)
+- D07 docs/modules/feature/cart.md → blocked (Q01)
 
 ## Docs updated
 - AGENTS.md (created, 112 lines)
 - docs/ARCHITECTURE.md (created)
-- docs/modules/feature-cart.md (updated: Endpoints, Gotchas)
+- docs/modules/feature/cart.md (updated: Data, Gotchas)
 
 ## Unverified
 - `./gradlew :app:assembleStagingDebug` — not run, needs local.properties
 
 ## Open questions (added to docs/STATUS.md)
-- Q01 Why is `CartStore` a singleton? (drafted as docs/adr/0003, status Proposed)
+- Q01 Why is `CartStore` a singleton?
 - Q02 Is `LegacyPaymentModule` still used in production?
 
 ## Suggested next step

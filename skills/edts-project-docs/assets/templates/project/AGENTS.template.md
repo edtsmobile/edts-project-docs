@@ -47,8 +47,6 @@ Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
 ## More Docs
 
+- [docs/README.md](docs/README.md) — index of every doc: modules, services, flows
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-- [docs/modules/](docs/modules/) — one file per module
-- [docs/flows/](docs/flows/) — cross-module journeys
-- [docs/adr/](docs/adr/) — architecture decisions
 - [docs/STATUS.md](docs/STATUS.md) — documentation tasks and open questions

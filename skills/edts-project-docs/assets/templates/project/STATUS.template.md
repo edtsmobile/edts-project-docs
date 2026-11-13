@@ -1,6 +1,7 @@
 <!--
 Template for docs/STATUS.md. Replace the example rows with the real inventory. Remove this comment.
 Statuses: todo | in-progress | review | done | blocked
+Type: <type>/<variant>, the template and folder (module/feature, module/core, flow/sequence, flow/journey, service/rest, service/sdk)
 -->
 # Documentation Status
 
@@ -20,9 +21,18 @@ Markdown in `AGENTS.md` and `docs/`. Never touches source files.
 | --- | --- | --- | --- | --- | --- | --- |
 | D01 | `AGENTS.md` + `CLAUDE.md` | entry | todo | | | |
 | D02 | `docs/ARCHITECTURE.md` | architecture | todo | | | |
-| D03 | `docs/modules/<module>.md` | module | todo | | | |
-| D04 | `docs/flows/<flow>.md` | flow | todo | | | |
-| D05 | `docs/adr/0001-<title>.md` | adr | todo | | | |
+| D03 | `docs/modules/core/<module>.md` | module/core | todo | | | |
+| D04 | `docs/modules/feature/<area>.md` | module/feature | todo | | | |
+| D05 | `docs/flows/sequence/<flow>.md` | flow/sequence | todo | | | |
+
+## Service Tasks
+
+One doc per backend service class (`docs/services/rest/`) or SDK (`docs/services/sdk/`). Never touches source files.
+
+| ID | Doc | Type | Status | Owner | PR | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| S01 | `docs/services/rest/<service>.md` | service/rest | todo | | | `<path to service class>` |
+| S02 | `docs/services/sdk/<sdk>.md` | service/sdk | todo | | | `<pod / Gradle dependency>` |
 
 ## Code Doc Tasks
 

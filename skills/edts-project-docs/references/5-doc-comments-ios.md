@@ -57,7 +57,7 @@ Rules:
 Only create a catalog when the user asks for a browsable site, or the module is consumed by other teams.
 
 - Add `Sources/<Module>/<Module>.docc/<Module>.md` with a `# ``<Module>`` ` title, a summary, and `## Topics` groups.
-- Long-form articles go in the same `.docc` folder as Markdown. Link them from `docs/modules/<module>.md` rather than duplicating content.
+- Long-form articles go in the same `.docc` folder as Markdown. Link them from `docs/modules/<variant>/<module>.md` rather than duplicating content.
 
 ## Building
 

@@ -1,6 +1,6 @@
 ---
 name: edts-project-docs
-description: Generate or update human- and AI-readable documentation (AGENTS.md, CLAUDE.md, docs/ARCHITECTURE.md, module docs, flows, ADRs, DocC/KDoc comments) for EDTS iOS and Android projects. Use this whenever asked to document a project, module, feature, or public API, or when a change makes existing docs out of date.
+description: Generate or update human- and AI-readable documentation (AGENTS.md, CLAUDE.md, docs/ARCHITECTURE.md, module, service and flow docs, DocC/KDoc comments) for EDTS iOS and Android projects. Use this whenever asked to document a project, module, feature, or public API, or when a change makes existing docs out of date.
 ---
 
 # EDTS Project Documentation
@@ -14,13 +14,30 @@ You are documenting an **EDTS mobile project** (iOS or Android). The output must
 | [references/1-platform-detection.md](references/1-platform-detection.md)       | Detecting iOS vs. Android and existing docs    |
 | [references/2-agents-md.md](references/2-agents-md.md)                         | AGENTS.md and CLAUDE.md — the entry point      |
 | [references/3-architecture.md](references/3-architecture.md)                   | docs/ARCHITECTURE.md                           |
-| [references/4-module-docs.md](references/4-module-docs.md)                     | Module docs, flows, and ADRs                   |
+| [references/4-module-docs.md](references/4-module-docs.md)                     | Module and flow docs — template variants       |
 | [references/5-doc-comments-ios.md](references/5-doc-comments-ios.md)           | Swift doc comments and DocC                    |
 | [references/6-doc-comments-android.md](references/6-doc-comments-android.md)   | KDoc and Dokka                                 |
 | [references/7-review-checklist.md](references/7-review-checklist.md)           | Self-review before finishing, final report     |
 | [references/8-status-tracking.md](references/8-status-tracking.md)             | docs/STATUS.md — shared task list              |
+| [references/9-service-docs.md](references/9-service-docs.md)                   | Service docs: backend APIs and SDKs            |
 
-Templates live in [assets/](assets/) as `<NAME>.template.md`. Always start from a template; never invent a new layout. Drop the `.template` part when writing the file into the project (e.g. `assets/AGENTS.template.md` → `AGENTS.md`).
+Templates live in [assets/templates/](assets/templates/), one folder per doc type, one file per variant. Always start from a template; never invent a new layout. Write each doc into the matching project folder and drop `.template` from the name:
+
+| Template | Written to |
+| --- | --- |
+| `assets/templates/project/AGENTS.template.md` | `AGENTS.md` (`ARCHITECTURE`, `STATUS` → `docs/`) |
+| `assets/templates/project/INDEX.template.md` | `docs/README.md` (the docs index) |
+| `assets/templates/module/<variant>.template.md` | `docs/modules/<variant>/<name>.md` |
+| `assets/templates/service/<variant>.template.md` | `docs/services/<variant>/<name>.md` |
+| `assets/templates/flow/<variant>.template.md` | `docs/flows/<variant>/<name>.md` |
+
+| Doc type | Variants (`<type>/<variant>`) |
+| --- | --- |
+| Module | `module/feature`, `module/core` |
+| Flow | `flow/sequence`, `flow/journey` |
+| Service | `service/rest`, `service/sdk` |
+
+Pick the variant with the rules in references 4 and 9, unless the user or the task row names one. **The folder is the template**: a doc in `docs/flows/journey/` uses `flow/journey`. Write the same `<type>/<variant>` in the task's **Type** column. Several variants of one type can be used in the same project.
 
 ## Output Layout
 
@@ -29,11 +46,18 @@ Templates live in [assets/](assets/) as `<NAME>.template.md`. Always start from 
 ├── AGENTS.md              # entry point for agents and new engineers
 ├── CLAUDE.md              # one line: @AGENTS.md
 └── docs/
+    ├── README.md          # docs index: every doc, grouped by type and variant
     ├── STATUS.md          # shared task list + open questions
     ├── ARCHITECTURE.md
-    ├── modules/<module>.md
-    ├── flows/<flow>.md
-    └── adr/NNNN-<title>.md
+    ├── modules/
+    │   ├── feature/<area>.md      # screens users see
+    │   └── core/<module>.md       # shared code
+    ├── services/
+    │   ├── rest/<service>.md      # own backend API
+    │   └── sdk/<sdk>.md           # Firebase, payment, analytics…
+    └── flows/
+        ├── sequence/<flow>.md     # code calls across layers
+        └── journey/<flow>.md      # screens and user choices
 ```
 
 ## Scope
@@ -42,9 +66,9 @@ There are two separate tracks. Pick the scope from the user's words. **The defau
 
 | Scope | Writes | References |
 | --- | --- | --- |
-| `docs` (default) | `AGENTS.md`, `CLAUDE.md`, everything under `docs/` | 2, 3, 4 |
+| `docs` (default) | `AGENTS.md`, `CLAUDE.md`, everything under `docs/` | 2, 3, 4, 9 |
 | `code` | Doc comments in source: DocC `///` (iOS) or KDoc `/** */` (Android). A `.docc` catalog or Dokka setup only if explicitly asked | 5 or 6 |
-| `all` | Both tracks | 2–6 |
+| `all` | Both tracks | 2–6, 9 |
 
 - Use `code` only when the user mentions doc comments, DocC, KDoc, Dokka, or API docs. Use `all` only when they ask for both.
 - In `docs` scope, **never edit a source file**. Read source, write only Markdown.
@@ -60,22 +84,34 @@ Work in this order. Stop where the user asked — "add AGENTS.md" means steps 1�
 1. `docs/STATUS.md` — inventory of all tasks — [references/8-status-tracking.md](references/8-status-tracking.md)
 2. **docs track:** `AGENTS.md` + `CLAUDE.md` — [references/2-agents-md.md](references/2-agents-md.md)
 3. **docs track:** `docs/ARCHITECTURE.md` — [references/3-architecture.md](references/3-architecture.md)
-4. **docs track:** `docs/modules/*.md`, `docs/flows/*.md`, ADRs — [references/4-module-docs.md](references/4-module-docs.md)
-5. **code track** (`code` / `all` scope only): doc comments per module, shared modules first — references 5 or 6
+4. **docs track:** `docs/modules/`, `docs/flows/` — [references/4-module-docs.md](references/4-module-docs.md)
+5. **docs track:** `docs/services/` — [references/9-service-docs.md](references/9-service-docs.md)
+6. **code track** (`code` / `all` scope only): doc comments per module, shared modules first — references 5 or 6
+7. **docs track:** `docs/README.md` — add every doc written in this run to the index (see below)
 
-For a large project, finish after step 3, leave the rest as `todo` rows in `docs/STATUS.md`, and report. The team picks up the remaining rows in task mode.
+For a large project, finish after step 3, write the index, leave the rest as `todo` rows in `docs/STATUS.md`, and report. The team picks up the remaining rows in task mode.
 
-### Task mode (the user names a task ID such as `D04` / `C02`, or asks for "the next task")
+### Task mode (the user names a task ID such as `D04` / `S02` / `C02`, or asks for "the next task")
 
-Follow [references/8-status-tracking.md](references/8-status-tracking.md). The task ID decides the track: `D` = docs track, `C` = code track.
+Follow [references/8-status-tracking.md](references/8-status-tracking.md). The task ID decides the track: `D` and `S` = docs track, `C` = code track.
 
 ### Update mode (the user asks to update docs for a change or branch)
 
 1. Read the diff: `git diff <base>...HEAD --stat`, then the changed files.
 2. Find docs that mention the changed paths, types, or commands (`grep -rn` in `AGENTS.md` and `docs/`).
 3. Edit only the affected sections. Do not rewrite unaffected docs.
-4. If the change adds a module, create its `docs/modules/<module>.md`, add it to `ARCHITECTURE.md`, and append its rows to `docs/STATUS.md`.
-5. In `code` / `all` scope, also update doc comments on changed public symbols.
+4. If the change adds a module, create its `docs/modules/<variant>/<module>.md`, add it to `ARCHITECTURE.md`, and append its rows to `docs/STATUS.md`.
+5. If an endpoint, request/response model, or SDK call changed, update its `docs/services/` doc.
+6. In `code` / `all` scope, also update doc comments on changed public symbols.
+7. Update `docs/README.md` if a doc was added, moved, or renamed.
+
+### Docs index — `docs/README.md`
+
+One page that lists every doc that exists, grouped by type and variant, with a one-line "Covers" summary each. GitHub, GitLab and Bitbucket show it automatically when someone opens `docs/`. Use [assets/templates/project/INDEX.template.md](assets/templates/project/INDEX.template.md).
+
+- Update it in **every** run that adds, moves, renames, or removes a doc, including task mode.
+- List only docs that exist. Planned docs stay in `docs/STATUS.md`.
+- Drop sections and variant tables that have no docs yet.
 
 ## Core Rules
 

@@ -1,6 +1,6 @@
 # Architecture Doc
 
-`docs/ARCHITECTURE.md` explains how the app is put together. Use [assets/ARCHITECTURE.template.md](../assets/ARCHITECTURE.template.md).
+`docs/ARCHITECTURE.md` explains how the app is put together. Use [assets/templates/project/ARCHITECTURE.template.md](../assets/templates/project/ARCHITECTURE.template.md).
 
 ## What to Discover
 

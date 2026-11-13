@@ -66,7 +66,7 @@ dokka {
 }
 ```
 
-`Module.md` starts with `# Module <gradle module name>`. Link it from `docs/modules/<module>.md` rather than duplicating content.
+`Module.md` starts with `# Module <gradle module name>`. Link it from `docs/modules/<variant>/<module>.md` rather than duplicating content.
 
 ## Building
 

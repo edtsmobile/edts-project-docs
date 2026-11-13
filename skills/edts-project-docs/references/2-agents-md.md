@@ -2,7 +2,7 @@
 
 `AGENTS.md` is the entry point. Codex, Cursor, Copilot, Gemini CLI and other agents read it automatically, and new engineers should read it first. It is loaded into every agent session, so every line costs context.
 
-Use [assets/AGENTS.template.md](../assets/AGENTS.template.md).
+Use [assets/templates/project/AGENTS.template.md](../assets/templates/project/AGENTS.template.md).
 
 ## CLAUDE.md
 
@@ -30,7 +30,7 @@ Claude-only notes, if any, go below that line. Never duplicate `AGENTS.md` conte
 | Where things live | Table of top-level paths and what they contain | Folder listing, opened files |
 | Conventions | Link to the guideline skill, plus project-specific rules | `edts-ios-guidelines`, lint configs, existing code |
 | Gotchas | Traps a new engineer or agent would hit | Code comments, `// FIXME`, `// HACK`, team answers |
-| More docs | Links to every file in `docs/` | — |
+| More docs | Link to the docs index `docs/README.md`, plus `ARCHITECTURE.md` and `STATUS.md` | — |
 
 ## Writing Rules
 

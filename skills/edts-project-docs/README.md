@@ -32,6 +32,7 @@ Everything is plain Markdown inside the project's repo, so it is readable on Git
 ├── CLAUDE.md                      ← one line: @AGENTS.md
 └── docs/
     ├── README.md                  ← index of every doc
+    ├── SUMMARY.md                 ← mdBook sidebar (same docs)
     ├── STATUS.md                  ← task list + open questions
     ├── ARCHITECTURE.md            ← how the app is built
     ├── modules/
@@ -45,6 +46,8 @@ Everything is plain Markdown inside the project's repo, so it is readable on Git
         └── journey/<flow>.md      ← screens and user choices
 ```
 
+`book.toml` (project root) and `docs/theme/mermaid-init.js` are added too, so the docs can be read as a book with mdBook (see [Reading as a book](#reading-as-a-book)).
+
 **Reading order for a new engineer or agent:** `AGENTS.md` → `docs/ARCHITECTURE.md` → `docs/README.md` → the module, service, or flow doc for the area they are working on.
 
 ### Project docs
@@ -56,6 +59,7 @@ Written once per project and kept up to date.
 | `AGENTS.md` | `project/AGENTS` | The entry point. Read automatically by Codex, Cursor, Copilot, Gemini CLI and others; Claude reads it through `CLAUDE.md`. At most 150 lines. | Build & Test (schemes/variants, exact commands) · Configuration (config files and who provides them, never values) · Architecture (2 lines + link) · Where Things Live (folder table) · Conventions · Gotchas · More Docs |
 | `CLAUDE.md` | — | Makes Claude Code read `AGENTS.md`. | One line: `@AGENTS.md` |
 | `docs/README.md` | `project/INDEX` | The docs index. Git hosts show it when someone opens `docs/`. Lists only docs that exist. | Overview · Modules (Feature, Core) · Services (REST, SDK) · Flows (Sequence, Journey), each a table of doc + one-line summary |
+| `docs/SUMMARY.md` + `book.toml` | `project/SUMMARY`, `project/book` | mdBook sidebar and settings. Same docs and groups as the index. | Parts per type, variant groups, one link per doc |
 | `docs/STATUS.md` | `project/STATUS` | Shared task list so several people can document one project in parallel, and a place for questions only the team can answer. | Docs Tasks (`D01`…) · Service Tasks (`S01`…) · Code Doc Tasks (`C01`…) · Open Questions (`Q01`…). Each task row has Doc, Type, Status, Owner, PR, Notes |
 | `docs/ARCHITECTURE.md` | `project/ARCHITECTURE` | How the app is put together, built from the real build files and code. | Overview · Module Map (table + mermaid dependency graph) · Layers (owns / must not / base types) · Data Flow (one request as a sequence diagram) · Cross-Cutting Concerns (DI, navigation, networking, persistence, auth & session, analytics & logging, feature flags) · Environments · Deviations from the EDTS guidelines |
 
@@ -202,6 +206,18 @@ Every generated doc must be reviewed by someone who knows the codebase. Check:
 - No secrets: API keys, tokens, and base URLs appear only as config key names, never values.
 - For a `code` task, `git diff` shows only comment lines.
 
+### Reading as a book
+
+The docs can also be read as a website with a sidebar, search, and light/dark themes, using [mdBook](https://rust-lang.github.io/mdBook/). The skill writes `book.toml` and `docs/SUMMARY.md` and keeps them in sync. On first use the agent checks for mdBook and **asks before installing it** (`brew install mdbook`); say no and the docs stay plain Markdown.
+
+To read the book, from the project root:
+
+```sh
+mdbook serve --open
+```
+
+The generated `book/` folder is ignored by git. Mermaid diagrams load from a CDN, so they need internet; offline they show as code.
+
 ### Good to know
 
 - The agent never commits or pushes. You decide what goes in each commit.
@@ -217,10 +233,11 @@ edts-project-docs/
 ├── SKILL.md            # entry point: scope, workflow, core rules
 ├── references/         # detailed rules, loaded only when a step needs them
 │   ├── 1-platform-detection.md … 8-status-tracking.md
-│   └── 9-service-docs.md
+│   ├── 9-service-docs.md
+│   └── 10-mdbook.md
 └── assets/
     └── templates/      # one folder per doc type, one file per variant
-        ├── project/    # AGENTS, ARCHITECTURE, STATUS, INDEX
+        ├── project/    # AGENTS, ARCHITECTURE, STATUS, INDEX, SUMMARY, book.toml, mermaid-init.js
         ├── module/     # feature, core
         ├── service/    # rest, sdk
         └── flow/       # sequence, journey

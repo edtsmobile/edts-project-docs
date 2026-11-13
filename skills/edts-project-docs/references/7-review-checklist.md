@@ -20,7 +20,9 @@ Run this checklist before telling the user you are done.
 
 - `AGENTS.md` is 150 lines or fewer (`wc -l AGENTS.md`).
 - `CLAUDE.md` starts with `@AGENTS.md`.
-- Every doc in `docs/` is listed in `docs/README.md`, and `AGENTS.md` links to `docs/README.md`.
+- Every doc in `docs/` is listed in `docs/README.md` and `docs/SUMMARY.md`, and `AGENTS.md` links to `docs/README.md`.
+- `mdbook build` passed, or the report says why it was not run (mdBook not installed, user declined).
+- `book/` is in `.gitignore` and not committed.
 - No generic advice, no empty or "N/A" sections, no duplicated content between files.
 - Mermaid blocks use the ` ```mermaid ` fence and valid syntax.
 - Every module, service, and flow doc sits in its variant folder (`docs/<type>/<variant>/`), and the folder matches its row's **Type** in `docs/STATUS.md`.

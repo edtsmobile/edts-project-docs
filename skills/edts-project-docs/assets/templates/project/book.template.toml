@@ -1,0 +1,14 @@
+# mdBook settings for the project docs. Copy to <project root>/book.toml.
+# Read the docs as a book: `mdbook serve --open` from the project root.
+
+[book]
+title = "<App Name> Docs"
+src = "docs"
+
+[build]
+build-dir = "book"
+# Fail instead of creating empty pages for SUMMARY.md entries that don't exist.
+create-missing = false
+
+[output.html]
+additional-js = ["docs/theme/mermaid-init.js"]

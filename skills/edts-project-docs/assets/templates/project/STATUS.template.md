@@ -1,6 +1,6 @@
 <!--
 Template for docs/STATUS.md. Replace the example rows with the real inventory. Remove this comment.
-Statuses: todo | in-progress | review | done | blocked
+Statuses: todo | in-progress | done | blocked
 Type: <type>/<variant>, the template and folder (module/feature, module/core, flow/sequence, flow/journey, service/rest, service/sdk)
 -->
 # Documentation Status

@@ -20,10 +20,8 @@ Run this checklist before telling the user you are done.
 
 - `AGENTS.md` is 150 lines or fewer (`wc -l AGENTS.md`).
 - `CLAUDE.md` starts with `@AGENTS.md`.
-- Every doc in `docs/` is listed in `docs/README.md` and `docs/SUMMARY.md`, and `AGENTS.md` links to `docs/README.md`.
-- `mdbook build` passed, or the report says why it was not run (mdBook not installed, user declined).
-- The changed docs were opened in the book preview, or their URLs are in the report; only one `mdbook serve` runs for the project.
-- `book/` is in `.gitignore` and not committed.
+- Every doc in `docs/` is listed in `docs/README.md`, and `AGENTS.md` links to `docs/README.md`.
+- If the project has `book.toml`, `docs/SUMMARY.md` lists the same docs as the index.
 - No generic advice, no empty or "N/A" sections, no duplicated content between files.
 - Mermaid blocks use the ` ```mermaid ` fence and valid syntax.
 - Every module, service, and flow doc sits in its variant folder (`docs/<type>/<variant>/`), and the folder matches its row's **Type** in `docs/STATUS.md`.
@@ -40,15 +38,12 @@ Run this checklist before telling the user you are done.
 End every run with this report in chat:
 
 ```
-## Preview
-http://localhost:3000/flows/journey/warehouse-selection.html (server left running; Ctrl+C or stop the background process to end it)
-
 ## Scope
 docs (default) — code track not run; ask for DocC/KDoc comments to start it
 
 ## Tasks
-- D01 AGENTS.md → review
-- D02 docs/ARCHITECTURE.md → review
+- D01 AGENTS.md → done
+- D02 docs/ARCHITECTURE.md → done
 - D07 docs/modules/feature/cart.md → blocked (Q01)
 
 ## Docs updated
@@ -62,6 +57,9 @@ docs (default) — code track not run; ask for DocC/KDoc comments to start it
 ## Open questions (added to docs/STATUS.md)
 - Q01 Why is `CartStore` a singleton?
 - Q02 Is `LegacyPaymentModule` still used in production?
+
+## Book
+To read it as a book, run `/edts-docs-book`.   (only if the project has book.toml)
 
 ## Suggested next step
 Next todo rows: D08 feature-checkout, D09 feature-profile

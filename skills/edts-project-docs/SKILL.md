@@ -20,7 +20,6 @@ You are documenting an **EDTS mobile project** (iOS or Android). The output must
 | [references/7-review-checklist.md](references/7-review-checklist.md)           | Self-review before finishing, final report     |
 | [references/8-status-tracking.md](references/8-status-tracking.md)             | docs/STATUS.md — shared task list              |
 | [references/9-service-docs.md](references/9-service-docs.md)                   | Service docs: backend APIs and SDKs            |
-| [references/10-mdbook.md](references/10-mdbook.md)                             | Reading the docs as a book with mdBook         |
 
 Templates live in [assets/templates/](assets/templates/), one folder per doc type, one file per variant. Always start from a template; never invent a new layout. Write each doc into the matching project folder and drop `.template` from the name:
 
@@ -28,7 +27,6 @@ Templates live in [assets/templates/](assets/templates/), one folder per doc typ
 | --- | --- |
 | `assets/templates/project/AGENTS.template.md` | `AGENTS.md` (`ARCHITECTURE`, `STATUS` → `docs/`) |
 | `assets/templates/project/INDEX.template.md` | `docs/README.md` (the docs index) |
-| `assets/templates/project/SUMMARY.template.md`, `book.template.toml`, `mermaid-init.js` | `docs/SUMMARY.md`, `book.toml`, `docs/theme/mermaid-init.js` (mdBook) |
 | `assets/templates/module/<variant>.template.md` | `docs/modules/<variant>/<name>.md` |
 | `assets/templates/service/<variant>.template.md` | `docs/services/<variant>/<name>.md` |
 | `assets/templates/flow/<variant>.template.md` | `docs/flows/<variant>/<name>.md` |
@@ -49,7 +47,7 @@ Pick the variant with the rules in references 4 and 9, unless the user or the ta
 ├── CLAUDE.md              # one line: @AGENTS.md
 └── docs/
     ├── README.md          # docs index: every doc, grouped by type and variant
-    ├── SUMMARY.md         # mdBook sidebar, same docs as README.md
+    ├── SUMMARY.md         # only with edts-docs-book: book sidebar, same docs as README.md
     ├── STATUS.md          # shared task list + open questions
     ├── ARCHITECTURE.md
     ├── modules/
@@ -69,9 +67,9 @@ There are two separate tracks. Pick the scope from the user's words. **The defau
 
 | Scope | Writes | References |
 | --- | --- | --- |
-| `docs` (default) | `AGENTS.md`, `CLAUDE.md`, everything under `docs/` | 2, 3, 4, 9, 10 |
+| `docs` (default) | `AGENTS.md`, `CLAUDE.md`, everything under `docs/` | 2, 3, 4, 9 |
 | `code` | Doc comments in source: DocC `///` (iOS) or KDoc `/** */` (Android). A `.docc` catalog or Dokka setup only if explicitly asked | 5 or 6 |
-| `all` | Both tracks | 2–6, 9, 10 |
+| `all` | Both tracks | 2–6, 9 |
 
 - Use `code` only when the user mentions doc comments, DocC, KDoc, Dokka, or API docs. Use `all` only when they ask for both.
 - In `docs` scope, **never edit a source file**. Read source, write only Markdown.
@@ -91,14 +89,12 @@ Work in this order. Stop where the user asked — "add AGENTS.md" means steps 1�
 5. **docs track:** `docs/services/` — [references/9-service-docs.md](references/9-service-docs.md)
 6. **code track** (`code` / `all` scope only): doc comments per module, shared modules first — references 5 or 6
 7. **docs track:** `docs/README.md` — add every doc written in this run to the index (see below)
-8. **docs track:** mdBook — `book.toml`, `docs/SUMMARY.md`, `docs/theme/mermaid-init.js`; ask before installing mdBook — [references/10-mdbook.md](references/10-mdbook.md)
-9. **Preview:** build the book, start or reuse `mdbook serve`, and open the new docs in the built-in browser (or report their URLs) — reference 10, "Preview After Every Run"
 
-For a large project, finish after step 3, write the index and the mdBook files, leave the rest as `todo` rows in `docs/STATUS.md`, and report. The team picks up the remaining rows in task mode.
+For a large project, finish after step 3, write the index, leave the rest as `todo` rows in `docs/STATUS.md`, and report. The team picks up the remaining rows in task mode.
 
 ### Task mode (the user names a task ID such as `D04` / `S02` / `C02`, or asks for "the next task")
 
-Follow [references/8-status-tracking.md](references/8-status-tracking.md). The task ID decides the track: `D` and `S` = docs track, `C` = code track. End with the book preview (reference 10).
+Follow [references/8-status-tracking.md](references/8-status-tracking.md). The task ID decides the track: `D` and `S` = docs track, `C` = code track.
 
 ### Update mode (the user asks to update docs for a change or branch)
 
@@ -108,15 +104,17 @@ Follow [references/8-status-tracking.md](references/8-status-tracking.md). The t
 4. If the change adds a module, create its `docs/modules/<variant>/<module>.md`, add it to `ARCHITECTURE.md`, and append its rows to `docs/STATUS.md`.
 5. If an endpoint, request/response model, or SDK call changed, update its `docs/services/` doc.
 6. In `code` / `all` scope, also update doc comments on changed public symbols.
-7. Update `docs/README.md` and `docs/SUMMARY.md` if a doc was added, moved, or renamed. If mdBook is installed, build and preview the changed docs (reference 10).
+7. Update `docs/README.md` (and `docs/SUMMARY.md` if the project has `book.toml`) if a doc was added, moved, or renamed.
 
 ### Docs index — `docs/README.md`
 
 One page that lists every doc that exists, grouped by type and variant, with a one-line "Covers" summary each. GitHub, GitLab and Bitbucket show it automatically when someone opens `docs/`. Use [assets/templates/project/INDEX.template.md](assets/templates/project/INDEX.template.md).
 
-- Update it in **every** run that adds, moves, renames, or removes a doc, including task mode. Make the same change in `docs/SUMMARY.md` (reference 10).
+- Update it in **every** run that adds, moves, renames, or removes a doc, including task mode.
 - List only docs that exist. Planned docs stay in `docs/STATUS.md`.
 - Drop sections and variant tables that have no docs yet.
+
+**Book sidebar:** if the project has `book.toml` (it uses the `edts-docs-book` skill), make the same change in `docs/SUMMARY.md`: same docs and groups as the index, variant groups as unlinked entries (`- [Feature]()`) with docs indented under them. Then end the report with: "To read it as a book, run `/edts-docs-book`." Never run mdBook from this skill.
 
 ## Core Rules
 

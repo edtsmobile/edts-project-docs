@@ -13,7 +13,7 @@ Four tables, each with its own ID prefix:
 | Code Doc Tasks | `C01`, `C02`, … | code | DocC / KDoc comments, one row per module |
 | Open Questions | `Q01`, `Q02`, … | — | "Why" questions only the team can answer |
 
-Statuses are plain text, exactly one of: `todo`, `in-progress`, `review`, `done`, `blocked`.
+Statuses are plain text, exactly one of: `todo`, `in-progress`, `done`, `blocked`.
 
 The **Type** column holds `<type>/<variant>` (`module/feature`, `flow/journey`, `service/rest`, …; see SKILL.md), which is also the doc's folder. For `todo` rows it is the planned variant; whoever does the task may change it if the code says otherwise, and then updates the **Doc** path too.
 
@@ -43,11 +43,11 @@ When the user names a task ID or asks for "the next task":
    - `D` task: references 2, 3, or 4. Never edit source files.
    - `S` task: reference 9. Never edit source files.
    - `C` task: reference 5 (iOS) or 6 (Android). Only comment lines, only in that row's module.
-5. Add the new doc to `docs/README.md` (the docs index) and `docs/SUMMARY.md` (the book sidebar); build and preview the book if mdBook is installed (reference 10). Set **Status** `review`. Fill **PR** if the user gives the PR link.
+5. Add the new doc to `docs/README.md` (the docs index), and to `docs/SUMMARY.md` if the project has `book.toml`. Set **Status** `done` as soon as the doc is written and passes the checklist ([7-review-checklist.md](7-review-checklist.md)). Fill **PR** if the user gives the PR link.
 6. Add any new questions to Open Questions with **From** = the task ID. If the task cannot be finished without an answer, set the task to `blocked` and name the question ID in the Notes column.
 7. If you discovered work that has no row (a missing module, service, or flow), append a new `todo` row.
 
-The user, not the agent, sets `done` after the PR is merged.
+There is no separate review status: a written doc is `done`. Review happens in the PR; if the reviewer finds problems, fix the doc, the row stays `done`.
 
 ## Open Questions
 

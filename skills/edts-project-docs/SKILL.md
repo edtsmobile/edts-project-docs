@@ -47,6 +47,7 @@ Pick the variant with the rules in references 4 and 9, unless the user or the ta
 ├── CLAUDE.md              # one line: @AGENTS.md
 └── docs/
     ├── README.md          # docs index: every doc, grouped by type and variant
+    ├── SUMMARY.md         # only with edts-docs-book: book sidebar, same docs as README.md
     ├── STATUS.md          # shared task list + open questions
     ├── ARCHITECTURE.md
     ├── modules/
@@ -103,7 +104,7 @@ Follow [references/8-status-tracking.md](references/8-status-tracking.md). The t
 4. If the change adds a module, create its `docs/modules/<variant>/<module>.md`, add it to `ARCHITECTURE.md`, and append its rows to `docs/STATUS.md`.
 5. If an endpoint, request/response model, or SDK call changed, update its `docs/services/` doc.
 6. In `code` / `all` scope, also update doc comments on changed public symbols.
-7. Update `docs/README.md` if a doc was added, moved, or renamed.
+7. Update `docs/README.md` (and `docs/SUMMARY.md` if the project has `book.toml`) if a doc was added, moved, or renamed.
 
 ### Docs index — `docs/README.md`
 
@@ -112,6 +113,8 @@ One page that lists every doc that exists, grouped by type and variant, with a o
 - Update it in **every** run that adds, moves, renames, or removes a doc, including task mode.
 - List only docs that exist. Planned docs stay in `docs/STATUS.md`.
 - Drop sections and variant tables that have no docs yet.
+
+**Book sidebar:** if the project has `book.toml` (it uses the `edts-docs-book` skill), make the same change in `docs/SUMMARY.md`: same docs and groups as the index, variant groups as unlinked entries (`- [Feature]()`) with docs indented under them. Then end the report with: "To read it as a book, run `/edts-docs-book`." Never run mdBook from this skill.
 
 ## Core Rules
 

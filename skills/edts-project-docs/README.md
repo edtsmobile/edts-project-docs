@@ -32,6 +32,7 @@ Everything is plain Markdown inside the project's repo, so it is readable on Git
 ├── CLAUDE.md                      ← one line: @AGENTS.md
 └── docs/
     ├── README.md                  ← index of every doc
+    ├── SUMMARY.md                 ← only with edts-docs-book: book sidebar
     ├── STATUS.md                  ← task list + open questions
     ├── ARCHITECTURE.md            ← how the app is built
     ├── modules/
@@ -152,8 +153,8 @@ Each row in `docs/STATUS.md` is one doc. `D` rows are docs, `S` rows are service
    ```
    Do D07 from docs/STATUS.md using edts-project-docs
    ```
-3. Review what it wrote and open a PR. The agent sets the row to `review` and adds the doc to `docs/README.md`.
-4. After merge, set the row to `done`.
+3. The agent writes the doc, adds it to `docs/README.md`, and sets the row to `done`.
+4. Review it and open a PR. If the reviewer finds problems, fix the doc; the row stays `done`.
 
 Not sure what to take? Ask for `the next task from docs/STATUS.md using edts-project-docs`.
 
@@ -201,6 +202,10 @@ Every generated doc must be reviewed by someone who knows the codebase. Check:
 - Every `> [!NOTE] Unverified:` callout: confirm it, or correct it and remove the note.
 - No secrets: API keys, tokens, and base URLs appear only as config key names, never values.
 - For a `code` task, `git diff` shows only comment lines.
+
+### Reading as a book
+
+To read the docs as a website with a sidebar and search, install the companion skill [`edts-docs-book`](../edts-docs-book/) and run `/edts-docs-book`. This skill keeps `docs/SUMMARY.md` in sync when the project has `book.toml`, but never runs mdBook itself.
 
 ### Good to know
 

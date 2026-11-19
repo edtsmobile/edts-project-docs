@@ -5,7 +5,7 @@ Remove sections and variant tables with no docs yet. Remove this comment.
 -->
 # <App Name> Docs
 
-Start with [AGENTS.md](../AGENTS.md) for build steps, configuration, and gotchas. Planned docs and open questions are in [STATUS.md](STATUS.md).
+Start with `AGENTS.md` in the project root for build steps, configuration, and gotchas. Planned docs and open questions are in [STATUS.md](STATUS.md).
 
 ## Overview
 

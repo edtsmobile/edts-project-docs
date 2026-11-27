@@ -1,7 +1,5 @@
 # Swift Doc Comments & DocC
 
-> **Code track only.** Apply this file only when the scope is `code` or `all`, or for a `C` task in `docs/STATUS.md`. In the default `docs` scope, never edit Swift files.
-
 Doc comments are read by agents straight from source and shown by Xcode in Quick Help (Option-click). DocC renders them into browsable docs.
 
 ## Where to Add Them

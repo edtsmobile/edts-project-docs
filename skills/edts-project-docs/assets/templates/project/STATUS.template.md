@@ -38,7 +38,7 @@ One doc per backend service class (`docs/services/rest/`) or SDK (`docs/services
 
 DocC `///` comments (iOS) or KDoc `/** */` comments (Android) in source. Comment lines only.
 
-_Not started. Ask your agent to "add the code doc tasks to docs/STATUS.md using edts-project-docs" to fill this table._
+_Not started. Ask your agent to "add the code doc tasks to docs/STATUS.md using edts-code-docs" to fill this table._
 
 | ID | Module | Path | Status | Owner | PR | Notes |
 | --- | --- | --- | --- | --- | --- | --- |

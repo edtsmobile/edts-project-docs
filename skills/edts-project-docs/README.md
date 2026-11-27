@@ -1,13 +1,15 @@
 # EDTS Project Docs
 
-Documentation skill for EDTS iOS and Android projects. Generates and maintains docs that both engineers and coding agents can read: `AGENTS.md`, `docs/ARCHITECTURE.md`, module, service and flow docs, and DocC/KDoc comments.
+Documentation skill for EDTS iOS and Android projects. Generates and maintains docs that both engineers and coding agents can read: `AGENTS.md`, `docs/ARCHITECTURE.md`, module, service and flow docs, a docs index, and a shared task list. Markdown only: it never edits source files.
+
+Companion skills: [`edts-code-docs`](../edts-code-docs/) writes DocC/KDoc comments in source; [`edts-book-docs`](../edts-book-docs/) reads these docs as a searchable book.
 
 ## Installation
 
 Requires Node.js and read access to the `edtsmobile/edts-project-docs` repository. Then run:
 
 ```sh
-npx skills add edtsmobile/edts-project-docs
+npx skills add edtsmobile/edts-project-docs -s edts-project-docs
 ```
 
 ### Update
@@ -32,7 +34,7 @@ Everything is plain Markdown inside the project's repo, so it is readable on Git
 ├── CLAUDE.md                      ← one line: @AGENTS.md
 └── docs/
     ├── README.md                  ← index of every doc
-    ├── SUMMARY.md                 ← only with edts-docs-book: book sidebar
+    ├── SUMMARY.md                 ← only with edts-book-docs: book sidebar
     ├── STATUS.md                  ← task list + open questions
     ├── ARCHITECTURE.md            ← how the app is built
     ├── modules/
@@ -98,20 +100,6 @@ Something that crosses modules. Pick the variant by asking: is the reader follow
 | **Emart example** | `sequence/login-and-token-refresh.md` | `journey/warehouse-selection.md` |
 
 Every arrow and step must match code the agent actually opened.
-
-### Doc comments (code track, on request)
-
-DocC `///` comments for Swift or KDoc `/** */` for Kotlin, added only to shared code (base classes, services, repositories) and to functions with non-obvious behavior. They show up in Xcode Quick Help / Android Studio Quick Documentation and are read by agents from the source.
-
-```swift
-/// Refreshes the access token after a 401.
-///
-/// Sends the saved refresh token through `KeyRepository`. With no saved
-/// refresh token, calls ``onUnauthorizedRequest()`` immediately.
-func requestRefreshToken()
-```
-
-Only comment lines change. A `.docc` catalog or Dokka setup is added only if you ask for it.
 
 ### Rules every doc follows
 
@@ -183,16 +171,10 @@ The agent reads the branch diff, edits only the affected sections, adds docs for
 | Choose the template variant | `Do D18 from docs/STATUS.md with flow/journey using edts-project-docs` |
 | Document one service | `Document CartService using edts-project-docs` |
 | Update after code changes | `Update the docs for the changes on this branch using edts-project-docs` |
-| Plan doc-comment tasks only | `Add the code doc tasks to docs/STATUS.md using edts-project-docs` |
-| Add DocC / KDoc comments | `Do C01 from docs/STATUS.md using edts-project-docs` or `Add DocC comments to Cores/Base using edts-project-docs` |
-| Docs and doc comments together | `Document this project, docs and DocC, using edts-project-docs` |
 
-### Docs vs. code comments
+### Doc comments in source
 
-| Track | Writes | When |
-| --- | --- | --- |
-| **docs** (default) | `AGENTS.md`, `CLAUDE.md`, `docs/`. Markdown only, never touches source | Always, unless you ask otherwise |
-| **code** | DocC `///` (iOS) or KDoc `/** */` (Android) comments in source, comment lines only | Only when you mention doc comments, DocC, or KDoc |
+DocC `///` and KDoc `/** */` comments are a separate skill, [`edts-code-docs`](../edts-code-docs/). It fills and does the Code Doc Tasks (`C01`…) in the same `docs/STATUS.md`. This skill leaves those rows alone.
 
 ### Reviewing a docs PR
 
@@ -201,11 +183,11 @@ Every generated doc must be reviewed by someone who knows the codebase. Check:
 - Facts match the code: class names, paths, commands, screen names.
 - Every `> [!NOTE] Unverified:` callout: confirm it, or correct it and remove the note.
 - No secrets: API keys, tokens, and base URLs appear only as config key names, never values.
-- For a `code` task, `git diff` shows only comment lines.
+- `git diff --stat` shows no source files.
 
 ### Reading as a book
 
-To read the docs as a website with a sidebar and search, install the companion skill [`edts-docs-book`](../edts-docs-book/) and run `/edts-docs-book`. This skill keeps `docs/SUMMARY.md` in sync when the project has `book.toml`, but never runs mdBook itself.
+To read the docs as a website with a sidebar and search, install the companion skill [`edts-book-docs`](../edts-book-docs/) and run `/edts-book-docs`. This skill keeps `docs/SUMMARY.md` in sync when the project has `book.toml`, but never runs mdBook itself.
 
 ### Good to know
 
@@ -219,10 +201,9 @@ Follows the [Agent Skills](https://agentskills.io/specification) layout:
 
 ```
 edts-project-docs/
-├── SKILL.md            # entry point: scope, workflow, core rules
+├── SKILL.md            # entry point: workflow, core rules
 ├── references/         # detailed rules, loaded only when a step needs them
-│   ├── 1-platform-detection.md … 8-status-tracking.md
-│   └── 9-service-docs.md
+│   └── 1-platform-detection.md … 7-review-checklist.md
 └── assets/
     └── templates/      # one folder per doc type, one file per variant
         ├── project/    # AGENTS, ARCHITECTURE, STATUS, INDEX

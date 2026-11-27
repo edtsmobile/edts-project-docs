@@ -6,11 +6,11 @@
 
 Four tables, each with its own ID prefix:
 
-| Table | ID prefix | Track | Contents |
+| Table | ID prefix | Owned by | Contents |
 | --- | --- | --- | --- |
-| Docs Tasks | `D01`, `D02`, … | docs | `AGENTS.md`, `ARCHITECTURE.md`, module docs, flows |
-| Service Tasks | `S01`, `S02`, … | docs | One row per backend service class or SDK |
-| Code Doc Tasks | `C01`, `C02`, … | code | DocC / KDoc comments, one row per module |
+| Docs Tasks | `D01`, `D02`, … | this skill | `AGENTS.md`, `ARCHITECTURE.md`, module docs, flows |
+| Service Tasks | `S01`, `S02`, … | this skill | One row per backend service class or SDK |
+| Code Doc Tasks | `C01`, `C02`, … | `edts-code-docs` | DocC / KDoc comments, one row per module |
 | Open Questions | `Q01`, `Q02`, … | — | "Why" questions only the team can answer |
 
 Statuses are plain text, exactly one of: `todo`, `in-progress`, `done`, `blocked`.
@@ -28,21 +28,21 @@ If `docs/STATUS.md` does not exist, create it before writing any other doc.
 3. One row per module from the build files (see [1-platform-detection.md](1-platform-detection.md)), Core/shared modules first
 4. Flow candidates found in code: app launch, login/session refresh, the main transaction, deep links, push notifications — only those that exist
 
-**Service Tasks** — always fill: one row per backend service class or API client, then one row per SDK with app-wide impact (see [9-service-docs.md](9-service-docs.md)).
+**Service Tasks** — always fill: one row per backend service class or API client, then one row per SDK with app-wide impact (see [5-service-docs.md](5-service-docs.md)).
 
-**Code Doc Tasks** — fill only when the scope is `code` or `all`. In `docs` scope, leave the table with the template's "Not started" line. One row per module with public API, shared modules first. Skip modules with no public/cross-module API. When filling it, remove the "Not started" line. The user can also ask to fill this table later without doing any code task yet.
+**Code Doc Tasks** — leave the table with the template's "Not started" line. `edts-code-docs` fills it and does its rows. If the table already has rows, never change them.
 
 ## Task Mode
 
 When the user names a task ID or asks for "the next task":
 
-1. Read `docs/STATUS.md`. For "the next task", pick the first `todo` row in the track that matches the scope (default: Docs Tasks, then Service Tasks).
+1. Read `docs/STATUS.md`. For "the next task", pick the first `todo` row in Docs Tasks, then Service Tasks. Never pick a `C` row.
 2. If the row is `in-progress` with a different owner, stop and ask the user.
 3. Set **Owner** (ask the user for their handle, or use `git config user.name`) and **Status** `in-progress`. Tell the user to commit this one-line change on its own and push it, so others see the claim.
 4. Do the work with the track's rules only:
    - `D` task: references 2, 3, or 4. Never edit source files.
-   - `S` task: reference 9. Never edit source files.
-   - `C` task: reference 5 (iOS) or 6 (Android). Only comment lines, only in that row's module.
+   - `S` task: reference 5. Never edit source files.
+   - `C` task: not this skill. Tell the user to run it with `edts-code-docs`.
 5. Add the new doc to `docs/README.md` (the docs index), and to `docs/SUMMARY.md` if the project has `book.toml`. Set **Status** `done` as soon as the doc is written and passes the checklist ([7-review-checklist.md](7-review-checklist.md)). Fill **PR** if the user gives the PR link.
 6. Add any new questions to Open Questions with **From** = the task ID. If the task cannot be finished without an answer, set the task to `blocked` and name the question ID in the Notes column.
 7. If you discovered work that has no row (a missing module, service, or flow), append a new `todo` row.

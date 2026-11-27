@@ -1,5 +1,5 @@
 ---
-name: edts-docs-book
+name: edts-book-docs
 description: Read an EDTS project's Markdown docs as a searchable book with mdBook. Sets up book.toml and docs/SUMMARY.md, installs mdBook only with the user's permission, builds the book, serves it on localhost, opens pages in the built-in browser, and stops the server. Use only when the user asks to open, preview, build, serve, refresh, or stop the docs book. Never run it on your own after edts-project-docs writes docs.
 ---
 
@@ -16,7 +16,7 @@ Pick the mode from the user's words. The default is **Preview**.
 | Mode | Trigger words | Steps |
 | --- | --- | --- |
 | **Setup** | "set up the book", or no `book.toml` yet | Setup → Sync → Preview |
-| **Preview** (default) | "open", "preview", "show", "run", "serve", "rebuild", or `/edts-docs-book` with no words | Sync → Preview |
+| **Preview** (default) | "open", "preview", "show", "run", "serve", "rebuild", or `/edts-book-docs` with no words | Sync → Preview |
 | **Stop** | "stop", "kill", "close the book" | Stop |
 
 ## Files

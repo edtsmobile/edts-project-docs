@@ -65,8 +65,7 @@ Check for all of these before creating anything:
 
 - `README.md`, `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, `.github/copilot-instructions.md`
 - `docs/`, `Documentation/`, `wiki/`
-- `*.docc` catalogs (iOS), `dokka` blocks in Gradle files (Android)
-- Existing doc comments (`///`, `/** */`) in shared modules
+- Existing doc comments (`///`, `/** */`) in shared modules: read them as a source of "why"
 
 Rules:
 

@@ -7,7 +7,7 @@ Read the docs written by [`edts-project-docs`](../edts-project-docs/) as a searc
 Requires Node.js and read access to the `edtsmobile/edts-project-docs` repository:
 
 ```sh
-npx skills add edtsmobile/edts-project-docs -s edts-docs-book
+npx skills add edtsmobile/edts-project-docs -s edts-book-docs
 ```
 
 mdBook itself is installed on first use. The agent asks before running `brew install mdbook`; say no and nothing is installed.
@@ -18,9 +18,9 @@ From the project root, after the project has docs (`docs/README.md`):
 
 | Goal | Prompt |
 | --- | --- |
-| Open the book | `/edts-docs-book` or `Open the docs book` |
-| Set it up in a new project | `Set up the docs book using edts-docs-book` |
-| Show a page you just wrote | `/edts-docs-book` right after `/edts-project-docs`: it opens the changed page |
+| Open the book | `/edts-book-docs` or `Open the docs book` |
+| Set it up in a new project | `Set up the docs book using edts-book-docs` |
+| Show a page you just wrote | `/edts-book-docs` right after `/edts-project-docs`: it opens the changed page |
 | Stop the server | `Stop the docs book` |
 
 The agent:
@@ -47,7 +47,7 @@ mdbook serve --open
 ## Structure
 
 ```
-edts-docs-book/
+edts-book-docs/
 ├── SKILL.md            # modes: setup, sync, preview, stop
 └── assets/templates/
     ├── book.template.toml

@@ -1,7 +1,5 @@
 # KDoc & Dokka
 
-> **Code track only.** Apply this file only when the scope is `code` or `all`, or for a `C` task in `docs/STATUS.md`. In the default `docs` scope, never edit Kotlin files.
-
 KDoc comments are read by agents straight from source and shown by Android Studio in Quick Documentation (F1 / Ctrl+Q). Dokka renders them into browsable docs.
 
 ## Where to Add Them

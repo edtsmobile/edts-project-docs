@@ -12,8 +12,7 @@ Run this checklist before telling the user you are done.
 ## Safety
 
 - No secrets, tokens, keys, passwords, signing values, or private hostnames copied into docs.
-- `docs` scope: `git diff --stat` lists no source files (`.swift`, `.kt`, `.java`, build files).
-- `code` scope: `git diff` on source files shows comment lines only, and only in the task's module.
+- `git diff --stat` lists no source files (`.swift`, `.kt`, `.java`, build files).
 - No existing human-written docs deleted. Moved content is linked from its old location.
 
 ## Fitness
@@ -38,9 +37,6 @@ Run this checklist before telling the user you are done.
 End every run with this report in chat:
 
 ```
-## Scope
-docs (default) — code track not run; ask for DocC/KDoc comments to start it
-
 ## Tasks
 - D01 AGENTS.md → done
 - D02 docs/ARCHITECTURE.md → done
@@ -59,10 +55,11 @@ docs (default) — code track not run; ask for DocC/KDoc comments to start it
 - Q02 Is `LegacyPaymentModule` still used in production?
 
 ## Book
-To read it as a book, run `/edts-docs-book`.   (only if the project has book.toml)
+To read it as a book, run `/edts-book-docs`.   (only if the project has book.toml)
 
 ## Suggested next step
 Next todo rows: D08 feature-checkout, D09 feature-profile
+Doc comments in source: use edts-code-docs (C rows)
 ```
 
 The open questions are the most valuable part of the report. They are the "why" knowledge that only the team has. Ask the user to answer them in the Answer column of `docs/STATUS.md` so the docs can be completed.
